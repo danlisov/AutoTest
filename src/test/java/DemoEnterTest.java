@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class DemoEnterTest {
 
     public static WebDriver driver;
@@ -15,10 +17,10 @@ public class DemoEnterTest {
 
     @BeforeClass
     public static void setUp() {
-        System.setProperty("webdriver.chrome.driver", "driver/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.navigate().to("https://online.omnicomm.ru/");
-        wait = new WebDriverWait(driver, 20);
+        driver.navigate().to("https://trueconf.ru/login.html");
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @AfterClass
