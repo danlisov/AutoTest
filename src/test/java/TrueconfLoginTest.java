@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;
@@ -39,6 +41,20 @@ public class TrueconfLoginTest {
 
         String expected = "Поле TrueConf ID не заполнено.\nПоле Пароль не заполнено.";
         String actual = driver.findElement(By.cssSelector("[class='error']")).getText().trim();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+
+    public void openNationalChannel() {
+        var urlButton = By.cssSelector("[class='news-banner__container']");
+
+
+        driver.findElement(urlButton).click();
+
+        String expected = "https://trueconf.ru/blog/press-release/kanal-rt-provodit-efiry-s-videosvyazyu-trukonf";
+        String actual = driver.getCurrentUrl();
 
         assertEquals(expected, actual);
     }
