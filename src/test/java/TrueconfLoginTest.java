@@ -33,24 +33,23 @@ public class TrueconfLoginTest {
         driver.quit();
     }
 
-//    @Test
-//
-//    public void errorWithEmptyField() {
-//        var submitButton = By.cssSelector("[type='submit']");
-//
-//        driver.findElement(submitButton).click();
-//
-//        String expected = "Поле TrueConf ID не заполнено.\nПоле Пароль не заполнено.";
-//        String actual = driver.findElement(By.cssSelector("[class='error']")).getText().trim();
-//
-//        assertEquals(expected, actual);
-//    }
+    @Test
+
+    public void errorWithEmptyField() {
+        var submitButton = By.cssSelector("[type='submit']");
+
+        driver.findElement(submitButton).click();
+
+        String expected = "Поле TrueConf ID не заполнено.\nПоле Пароль не заполнено.";
+        String actual = driver.findElement(By.cssSelector("[class='error']")).getText().trim();
+
+        assertEquals(expected, actual);
+    }
 
     @Test
 
     public void openNationalChannel() {
         var urlButton = By.cssSelector(".news-banner__container");
-
 
         driver.findElement(urlButton).click();
 
@@ -65,7 +64,6 @@ public class TrueconfLoginTest {
     public void openHomePage() {
         var logoButton = By.cssSelector(".header-menu__logo-link");
 
-
         driver.findElement(logoButton).click();
 
         String expected = "https://trueconf.ru/";
@@ -78,7 +76,6 @@ public class TrueconfLoginTest {
 
     public void openPageForgotPassword() {
         var logoButton = By.cssSelector("#forgot-password");
-
 
         driver.findElement(logoButton).click();
 
@@ -97,7 +94,6 @@ public class TrueconfLoginTest {
         urlButton.click();
         String expected = "header-menu__popup header-menu__popup--open";
 
-
         assertEquals(expected, products.getAttribute("class"));
     }
 
@@ -109,7 +105,6 @@ public class TrueconfLoginTest {
 
         urlButton.click();
         String expected = "false";
-
 
         assertEquals(expected, products.getAttribute("aria-hidden"));
     }
@@ -123,7 +118,6 @@ public class TrueconfLoginTest {
         urlButton.click();
         String expected = "header-menu__popup header-menu__popup--open";
 
-
         assertEquals(expected, products.getAttribute("class"));
     }
 
@@ -136,7 +130,6 @@ public class TrueconfLoginTest {
         urlButton.click();
         String expected = "false";
 
-
         assertEquals(expected, products.getAttribute("aria-hidden"));
     }
 
@@ -144,7 +137,6 @@ public class TrueconfLoginTest {
 
     public void openPricePage() {
         var priceBtn = driver.findElement(By.cssSelector(".header-menu__nav-item" + ".header-menu__nav-item--link"));
-
 
         priceBtn.click();
 
@@ -163,7 +155,6 @@ public class TrueconfLoginTest {
         urlButton.click();
         String expected = "header-menu__popup header-menu__popup--open";
 
-
         assertEquals(expected, products.getAttribute("class"));
     }
 
@@ -176,7 +167,6 @@ public class TrueconfLoginTest {
         urlButton.click();
         String expected = "false";
 
-
         assertEquals(expected, products.getAttribute("aria-hidden"));
     }
 
@@ -184,7 +174,6 @@ public class TrueconfLoginTest {
 
     public void openPageDownload() {
         var priceBtn = driver.findElement(By.cssSelector(".header-menu__btn" + ".header-menu__btn--navbar" + ".header-menu__btn--navbar--accent"));
-
 
         priceBtn.click();
 
