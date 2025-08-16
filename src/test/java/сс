@@ -1,0 +1,171 @@
+
+
+    public class TrueconfLoginTest {
+
+        public static WebDriver driver;
+        public static WebDriverWait wait;
+
+        @BeforeClass    //чтобы урл открывался перед каждым тестом в классе, нужна аннотация @BeforeMethod (но там maven надо расширять)
+        public static void setUp() {
+            System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
+            driver = new ChromeDriver();
+            driver.navigate().to("https://trueconf.ru/login.html");
+            wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        }
+
+        @AfterClass
+        public static void tearDown() {
+            driver.quit();
+        }
+
+        @Test
+        public void errorWithEmptyField() {
+            var submitButton = By.cssSelector("[type='submit']");
+
+            driver.findElement(submitButton).click();
+
+            String expected = "Поле TrueConf ID не заполнено.\n" +
+                    "Поле Пароль не заполнено.";
+            String actual = driver.findElement(By.cssSelector("[class='error']")).getText();
+            assertEquals("Текст ошибки отличается от ожидаемого, actual: " + actual, actual, expected);
+
+        }
+
+        @Test
+        public void openNationalChannel() {
+            var urlButton = By.cssSelector(".news-banner__container");
+
+            driver.findElement(urlButton).click();
+
+            String expected = "https://trueconf.ru/blog/press-release/kanal-rt-provodit-efiry-s-videosvyazyu-trukonf";
+            String actual = driver.getCurrentUrl();
+
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        public void openHomePage() {
+            var logoButton = By.cssSelector(".header-menu__logo-link");
+
+            driver.findElement(logoButton).click();
+
+            String expected = "https://trueconf.ru/";
+            String actual = driver.getCurrentUrl();
+
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        public void openPageForgotPassword() {
+            var logoButton = By.cssSelector("#forgot-password");
+
+            driver.findElement(logoButton).click();
+
+            String expected = "https://trueconf.ru/products/online/password-reset.html?login=";
+            String actual = driver.getCurrentUrl();
+            //добавить проверки надписей
+            //добавить проверку возможности ввести почту
+            //добавить проверку активности кнопки
+            //добавить проверку сообщения после ввода тестовой почты и нажатия кнопки
+
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        public void openProductsPageWithClass() {
+            var urlButton = driver.findElement(By.cssSelector("#hm-btn-1"));
+            var products = driver.findElement(By.cssSelector("#hm-menu-1"));
+
+            urlButton.click();
+            String expected = "header-menu__popup header-menu__popup--open";
+
+            assertEquals(expected, products.getAttribute("class"));
+            //непонятно, что именно проверяется, и проверяется всего 1 элемент, этого мало
+        }
+
+        @Test
+        public void openProductsPageWithHidden() {
+            var urlButton = driver.findElement(By.cssSelector("#hm-btn-1"));
+            var products = driver.findElement(By.cssSelector("#hm-menu-1"));
+
+            urlButton.click();
+            String expected = "false";
+
+            assertEquals(expected, products.getAttribute("aria-hidden"));
+            //непонятно, что именно проверяется, и проверяется всего 1 элемент, этого мало
+        }
+
+        @Test
+        public void openPagePossibilitiesWithClass() {
+            var urlButton = driver.findElement(By.cssSelector("#hm-btn-2"));
+            var products = driver.findElement(By.cssSelector("#hm-menu-2"));
+
+            urlButton.click();
+            String expected = "header-menu__popup header-menu__popup--open";
+            assertEquals(expected, products.getAttribute("class"));
+            //непонятно, что именно проверяется, и проверяется всего 1 элемент, этого мало
+        }
+
+        @Test
+        public void openPagePossibilitiesWithHidden() {
+            var urlButton = driver.findElement(By.cssSelector("#hm-btn-2"));
+            var products = driver.findElement(By.cssSelector("#hm-menu-2"));
+
+            urlButton.click();
+            String expected = "false";
+
+            assertEquals(expected, products.getAttribute("aria-hidden"));
+            //непонятно, что именно проверяется, и проверяется всего 1 элемент, этого мало
+        }
+
+        @Test
+        public void openPricePage() {
+            var priceBtn = driver.findElement(By.cssSelector(".header-menu__nav-item" +
+                    ".header-menu__nav-item--link"));
+
+            priceBtn.click();
+
+            String expected = "https://trueconf.ru/prices/server-price.html";
+            String actual = driver.getCurrentUrl();
+            //Здесь важно проверить весь текст на странице + активность всех кнопок.
+            //Для проверки всего текста на странице можно спросить у чата gpt и сформировать одну большую строку с текстом всего
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        public void openPageCompanyWithClass() {
+            var urlButton = driver.findElement(By.cssSelector("#hm-btn-4"));
+            var products = driver.findElement(By.cssSelector("#hm-menu-4"));
+
+            urlButton.click();
+            String expected = "header-menu__popup header-menu__popup--open";
+
+            assertEquals(expected, products.getAttribute("class"));
+        }
+
+        @Test
+        public void openPageCompanyWithHidden() {
+            var urlButton = driver.findElement(By.cssSelector("#hm-btn-4"));
+            var products = driver.findElement(By.cssSelector("#hm-menu-4"));
+
+            urlButton.click();
+            String expected = "false";
+
+            assertEquals(expected, products.getAttribute("aria-hidden"));
+        }
+
+        @Test
+        public void openPageDownload() {
+            var priceBtn = driver.findElement(By.cssSelector(".header-menu__btn" +
+                    ".header-menu__btn--navbar" + ".header-menu__btn--navbar--accent"));  //лучше делать строки короткими,
+            // так лучше читабельность кода
+
+            priceBtn.click();
+
+            String expected = "https://trueconf.ru/downloads/windows.html";
+            String actual = driver.getCurrentUrl();
+
+            assertEquals(expected, actual);
+        }
+    }
+    //пробелы в конце надо убирать
